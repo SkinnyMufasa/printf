@@ -33,6 +33,12 @@ int _printf(const char *format, ...)
 			case '%':
 				_putchar(_putchar(format[i]));
 				break;
+			case 'd':
+				print_number(va_arg(args, int));
+				break;
+			case 'i':
+				print_unsignedint(va_arg(args, int));
+				break;
 			default:
 				_putchar(format[i]);
 				break;
