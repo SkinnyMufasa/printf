@@ -11,5 +11,7 @@ int _putchar(char c);
 int _printf(const char *format, ...);
 int _puts(char *str);
 void print_unsignedint(unsigned int num);
+int check_fmt(va_list args, char fmt );
+int countstr(const char *str);
 
 #endif

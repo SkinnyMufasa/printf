@@ -1,5 +1,5 @@
 #include "main.h"
-
+#define is_int(x) _Generic((x), int: 1, default:0)
 /**
  * _printf - Custom printf function
  * @format: The format string
@@ -8,7 +8,7 @@
  */
 int _printf(const char *format, ...)
 {
-	int i;
+	int i, count = 0;
 	va_list args;
 
 	if (!format || (format[0] == '%' && format[1] == '\0'))
@@ -21,31 +21,15 @@ int _printf(const char *format, ...)
 			if (format[i] == '\0')
 				return (i);
 			_putchar(format[i]);
+			count++;
 			i++;
 		}
-		i++;
-		switch (format[i])
+		if (format[i] == '%')
 		{
-			case 'c':
-				_putchar(va_arg(args, int));
-				break;
-			case 's':
-				_puts(va_arg(args, char *));
-				break;
-			case '%':
-				_putchar(_putchar(format[i]));
-				break;
-			case 'd':
-				print_number(va_arg(args, int));
-				break;
-			case 'i':
-				print_unsignedint(va_arg(args, int));
-				break;
-			default:
-				_putchar(format[i]);
-				break;
+			i++;
+			check_fmt(args, format[i]);
 		}
 	}
 	va_end(args);
-	return (i);
+	return (count);
 }
