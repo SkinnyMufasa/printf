@@ -13,17 +13,23 @@ int _putchar(char c)
 	return (write(1, &c, 1));
 }
 
-/**
- * _puts - Outputs a string to the standard output.
- * @str: pointer to the null-terminated string to be output.
- */
+#include "main.h"
 
-void _puts(char *str)
+/**
+  * print_string - print a string
+  * @str: a pointer to a string
+  * Return: the len of the string
+  */
+
+int print_string(char *str)
 {
 	int i;
+	int len = 0;
 
-	for (i = 0; str[i]; i++)
-	{
-		_putchar(str[i]);
-	}
+	if (str == NULL)
+		str = "(nil)";
+	for (i = 0; str[i] != '\0'; i++)
+		len += _putchar(str[i]);
+
+	return (len);
 }

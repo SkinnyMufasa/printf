@@ -1,5 +1,5 @@
 #include "main.h"
-#define is_int(x) _Generic((x), int: 1, default:0)
+#define is_int(x) _Generic((x), int: 1, default : 0)
 /**
  * _printf - Custom printf function
  * @format: The format string
