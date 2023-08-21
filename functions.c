@@ -33,3 +33,44 @@ void digit_count(int n)
 		count++;
 	}
 }
+/**
+ * check_fmt - checks the format of a character after a '%' in a string
+ * @args: the vaa_list
+ * @fmt: format character
+ * 
+ * Return: count
+*/
+int check_fmt(va_list args, char fmt )
+{
+	int count = 0;
+	
+	switch (fmt)
+	{
+		case 'c':
+			if(sizeof(va_arg(args, char)) == 1)
+			{
+				_putchar(va_arg(args, int));
+			}
+			break;
+		case 's':
+			if(sizeof(va_arg(args, char *)) == 8)
+			{
+				_puts(va_arg(args, char *));
+			}
+			break;
+		case '%':
+			_putchar(_putchar(fmt));
+			break;
+		case 'i':
+		case 'd':
+			if(sizeof(va_arg(args, int)) == 4)
+			{
+				print_number(va_arg(args, int));
+			}
+			break;
+		default:
+			_putchar(fmt);
+			break;
+	}
+	return (count);
+}
