@@ -16,5 +16,6 @@ int check_fmt(va_list args, char fmt);
 int countstr(const char *str);
 int print_char(char c);
 int check_validity(char fmt);
+char *int2str(int num);
 
 #endif
