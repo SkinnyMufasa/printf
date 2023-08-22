@@ -15,4 +15,3 @@ int check_fmt(va_list args, char fmt );
 int countstr(const char *str);
 
 #endif
-
