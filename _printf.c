@@ -1,20 +1,32 @@
 #include "main.h"
-
 /**
- * _printf - function that produces output according to format
- * @format: string
- * Return: output length
+ * _printf - Custom printf function
+ * @format: The format string
+ * @...: Variadic arguments
+ * Return: Number of characters printed
  */
-
 int _printf(const char *format, ...)
 {
-	int i, count = 0;
+	int i = 0, count = 0;
 	va_list args;
 
 	va_start(args, format);
-	for (i = 0; format[i]; i++)
+	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
 	{
-		while (format[i] != '%')
+		return (-1);
+	}
+	
+	while (format && format[i])
+	{
+		if (format[i] == '\0')
+			return (i);
+		if (format[i] == '%')
+		{
+			i++;
+			count += check_fmt(args, format[i]);
+			i++;
+		}
+		else
 		{
 			if (format[i] == '\0')
 				return (i);
@@ -22,13 +34,7 @@ int _printf(const char *format, ...)
 			count++;
 			i++;
 		}
-		if (format[i] == '%')
-		{
-			i++;
-			check_fmt(args, format[i]);
-		}
 	}
 	va_end(args);
 	return (count);
 }
-
