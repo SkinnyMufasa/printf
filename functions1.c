@@ -1,10 +1,8 @@
 #include "main.h"
-
 /**
  * print_unsignedint - Prints an unsigned integer.
  * @num: The unsigned integer to be printed.
  */
-
 void print_unsignedint(unsigned int num)
 {
 	if (num / 10)

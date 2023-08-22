@@ -19,13 +19,11 @@ void print_number(int num)
 		print_number(num / 10);
 	_putchar((num % 10) + '0');
 }
-
 /**
  * digit_count - counts the number of digit in an integer
  * @n: The integer to count digits for
  * Return: Number of digits in the integer
  */
-
 void digit_count(int n)
 {
 	int count = 0;
@@ -45,10 +43,10 @@ void digit_count(int n)
  *
  * Return: count
 */
-
 int check_fmt(va_list args, char fmt)
 {
 	int count = 0;
+	char *str;
 
 	switch (fmt)
 	{
@@ -58,11 +56,19 @@ int check_fmt(va_list args, char fmt)
 				_putchar(va_arg(args, int));
 			}
 			break;
-		case 's':
-			print_string(va_arg(args, char *));
+		case 's' :
+			str = va_arg(args, char *);
+			if (str == NULL)
+				str = "(null)";
+			while (*str != '\0')
+			{
+				count += print_string(str);
+				str++;
+			}
 			break;
 		case '%':
-			_putchar(_putchar(fmt));
+			count++;
+			_putchar('%');
 			break;
 		case 'i':
 		case 'd':
@@ -77,3 +83,4 @@ int check_fmt(va_list args, char fmt)
 	}
 	return (count);
 }
+

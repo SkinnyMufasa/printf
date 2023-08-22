@@ -1,49 +1,34 @@
 #include "main.h"
 
 /**
- * check_format - checks format for unhandled cases
+ * _printf - function that produces output according to format
  * @format: string
- * Return: 0 if OK, -1 if KO
- */
-
-int check_format(const char *format)
-{
-	if (!format || (format[0] == '%' && !format[1]))
-		return (-1);
-	if (format[0] == '%' && format[1] == ' ' && !format[2])
-		return (-1);
-	return (0);
-}
-
-/**
- * _printf - function that produces output according to a format
- * @format: string to be printed
- * Return: output lenght
+ * Return: output length
  */
 
 int _printf(const char *format, ...)
 {
-	int i, len = 0;
-	va_list argv;
+	int i, count = 0;
+	va_list args;
 
-	if (check_format(format) == -1)
-		return (-1);
-
-	va_start(argv, format);
-
-	for (i = 0; format != NULL && format[i] != '\0'; i++)
+	va_start(args, format);
+	for (i = 0; format[i]; i++)
 	{
-		if (format[i] != '%')
-			len += _putchar(format[i]);
-		else
+		while (format[i] != '%')
 		{
-			if (format[i + 1] != '\0')
-				i++;
-
-			spec_conditions(format[i], &len, argv);
+			if (format[i] == '\0')
+				return (i);
+			_putchar(format[i]);
+			count++;
+			i++;
+		}
+		if (format[i] == '%')
+		{
+			i++;
+			check_fmt(args, format[i]);
 		}
 	}
-
-	va_end(argv);
-	return (len);
+	va_end(args);
+	return (count);
 }
+
