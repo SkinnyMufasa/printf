@@ -60,7 +60,8 @@ int check_fmt(va_list args, char fmt)
 			}
 			break;
 		case '%':
-			count += _putchar(fmt);
+			_putchar('%');
+			count++;
 			break;
 		case 'i':
 		case 'd':
