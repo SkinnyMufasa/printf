@@ -12,14 +12,15 @@ void print_unsignedint(unsigned int num)
 /**
  * print_char - prints a character
  * @c: character to print
- *
  * Return: 1 if successful Null if not
 */
 int print_char(char c)
 {
-	return (_putchar(c));
+	if (_putchar(c))
+		return (1);
+	else
+		return (0);
 }
-
 /**
  * check_validity - checks if the formater does not start with '\'
  * @fmt: the formater
