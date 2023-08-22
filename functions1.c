@@ -16,10 +16,7 @@ void print_unsignedint(unsigned int num)
 */
 int print_char(char c)
 {
-	if (_putchar(c))
-		return (1);
-	else
-		return (0);
+	return (_putchar(c));
 }
 /**
  * check_validity - checks if the formater does not start with '\'
