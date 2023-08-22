@@ -44,33 +44,41 @@ int check_fmt(va_list args, char fmt)
 {
 	int count = 0;
 
-	switch (fmt)
+	if (check_validity(fmt) == 1)
 	{
-		case 'c':
-			if (sizeof(va_arg(args, char)) == 1)
-			{
-				count += print_char(va_arg(args, int));
-			}
-			break;
-		case 's':
-			if (sizeof(va_arg(args, char *)) == 8)
-			{
-				_puts(va_arg(args, char *));
-			}
-			break;
-		case '%':
-			count += _putchar(fmt);
-			break;
-		case 'i':
-		case 'd':
-			if (sizeof(va_arg(args, int)) == 4)
-			{
-				print_number(va_arg(args, int));
-			}
-			break;
-		default:
-			count += _putchar(fmt);
-			break;
+		switch (fmt)
+		{
+			case 'c':
+				if (sizeof(va_arg(args, char)) == 1)
+				{
+					count += print_char(va_arg(args, int));
+				}
+				break;
+			case 's':
+				if (sizeof(va_arg(args, char *)) == 8)
+				{				
+					_puts(va_arg(args, char *));
+				}
+				break;
+			case '%':
+				count += _putchar(fmt);
+				break;
+			case 'i':
+			case 'd':
+				if (sizeof(va_arg(args, int)) == 4)
+				{
+					print_number(va_arg(args, int));
+				}
+				break;
+			default:
+				count += _putchar(fmt);
+				break;
+		}
 	}
+	else if (check_validity(fmt) == 0)
+	{
+		return (-1);
+	}
+	
 	return (count);
 }
