@@ -2,16 +2,16 @@
 #define MAIN_H
 
 #include <stdarg.h>
-#include <string.h>
+#include <stdio.h>
 #include <unistd.h>
+#include <string.h>
 
-void print_number(int num);
-void digit_count(int n);
-int _putchar(char c);
+#define NULL ((void *)0)
+#define BUFF_SIZE 1024
+
 int _printf(const char *format, ...);
+int _putchar(char c);
 int print_string(char *str);
-void print_unsignedint(unsigned int num);
-int check_fmt(va_list args, char fmt);
-int countstr(const char *str);
+int print_number(int num);
 
 #endif

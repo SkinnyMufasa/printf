@@ -1,35 +1,54 @@
 #include "main.h"
-#define is_int(x) _Generic((x), int: 1, default : 0)
+#include <stdarg.h>
+
 /**
- * _printf - Custom printf function
- * @format: The format string
- * @...: Variadic arguments
- * Return: Number of characters printed
+ * _printf - produces output according to format
+ * @format: character format
+ * Return: outputted character
  */
 int _printf(const char *format, ...)
-{
-	int i, count = 0;
+{	int i = 0, count = 0;
 	va_list args;
+	char *str;
 
-	if (!format || (format[0] == '%' && format[1] == '\0'))
-		return (-1);
 	va_start(args, format);
-	for (i = 0; format[i]; i++)
+	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+		return (-1);
+	while (format && format[i])
 	{
-		while (format[i] != '%')
+		if (format[i] != '%')
 		{
-			if (format[i] == '\0')
-				return (i);
 			_putchar(format[i]);
 			count++;
-			i++;
-		}
-		if (format[i] == '%')
+		} else
 		{
 			i++;
-			check_fmt(args, format[i]);
-		}
-	}
+			if (format[i] == '\0')
+			return (-1);
+		switch (format[i])
+			{
+			case 'c':
+				count += _putchar(va_arg(args, int));
+				break;
+			case 's':
+				str = va_arg(args, char *);
+				count += print_string(str);
+				break;
+			case '%':
+				_putchar('%');
+				count++;
+				break;
+			case 'd':
+			case 'i':
+				count += print_number(va_arg(args, int));
+				break;
+			default:
+				_putchar('%');
+				_putchar(format[i]);
+				count += 2;
+				break; }
+	} i++; }
 	va_end(args);
 	return (count);
 }
+
