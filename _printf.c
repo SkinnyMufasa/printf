@@ -1,54 +1,49 @@
 #include "main.h"
-#include <stdarg.h>
 
 /**
- * _printf - produces output according to format
- * @format: character format
- * Return: outputted character
+ * check_format - checks format for unhandled cases
+ * @format: string
+ * Return: 0 if OK, -1 if KO
  */
-int _printf(const char *format, ...)
-{	int i = 0, count = 0;
-	va_list args;
-	char *str;
 
-	va_start(args, format);
-	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+int check_format(const char *format)
+{
+	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
-	while (format && format[i])
-	{
-		if (format[i] != '%')
-		{
-			_putchar(format[i]);
-			count++;
-		} else
-		{
-			i++;
-			if (format[i] == '\0')
-			return (-1);
-		switch (format[i])
-			{
-			case 'c':
-				count += _putchar(va_arg(args, int));
-				break;
-			case 's':
-				str = va_arg(args, char *);
-				count += print_string(str);
-				break;
-			case '%':
-				_putchar('%');
-				count++;
-				break;
-			case 'd':
-			case 'i':
-				count += print_number(va_arg(args, int));
-				break;
-			default:
-				_putchar('%');
-				_putchar(format[i]);
-				count += 2;
-				break; }
-	} i++; }
-	va_end(args);
-	return (count);
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	return (0);
 }
 
+/**
+ * _printf - function that produces output according to a format
+ * @format: string to be printed
+ * Return: output lenght
+ */
+
+int _printf(const char *format, ...)
+{
+	int i, len = 0;
+	va_list argv;
+
+	if (check_format(format) == -1)
+		return (-1);
+
+	va_start(argv, format);
+
+	for (i = 0; format != NULL && format[i] != '\0'; i++)
+	{
+		if (format[i] != '%')
+			len += _putchar(format[i]);
+		else
+		{
+			if (format[i + 1] != '\0')
+				i++;
+
+			spec_conditions(format[i], &len, argv);
+		}
+	}
+
+	va_end(argv);
+	return (len);
+}

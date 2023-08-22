@@ -7,6 +7,7 @@
  * Return: On success 1.
  * On error, -1 is returned, and errno is set appropriatetly.
  */
+
 int _putchar(char c)
 {
 	return (write(1, &c, 1));
@@ -48,3 +49,4 @@ int print_number(int number)
 	else
 		return (print_number(number / 10) + print_number(number % 10));
 }
+
