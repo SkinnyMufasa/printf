@@ -9,3 +9,16 @@ void print_unsignedint(unsigned int num)
 		print_unsignedint(num / 10);
 	_putchar((num % 10) + '0');
 }
+/**
+ * print_char - prints a character
+ * @c: character to print
+ * 
+ * Return: 1 if successful Null if not
+*/
+int print_char(char c)
+{
+	if(_putchar(c))
+		return (1);
+	else
+		return (0);
+}

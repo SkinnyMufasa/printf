@@ -49,7 +49,7 @@ int check_fmt(va_list args, char fmt )
 		case 'c':
 			if(sizeof(va_arg(args, char)) == 1)
 			{
-				count += _putchar(va_arg(args, int));
+				count += print_char(va_arg(args, int));
 			}
 			break;
 		case 's':
@@ -59,7 +59,7 @@ int check_fmt(va_list args, char fmt )
 			}
 			break;
 		case '%':
-			count += _putchar(_putchar(fmt));
+			count += _putchar(fmt);
 			break;
 		case 'i':
 		case 'd':
