@@ -12,13 +12,33 @@ void print_unsignedint(unsigned int num)
 /**
  * print_char - prints a character
  * @c: character to print
- * 
+ *
  * Return: 1 if successful Null if not
 */
 int print_char(char c)
 {
-	if(_putchar(c))
-		return (1);
-	else
-		return (0);
+	return (_putchar(c));
+}
+
+/**
+ * check_validity - checks if the formater does not start with '\'
+ * @fmt: the formater
+ * Return: 1 (valid) 0 (!valid) -1 (error)
+*/
+int check_validity(char fmt)
+{
+	int validity;
+	int valid = 1, invalid = 0;
+
+	switch (fmt)
+	{
+		case '\0':
+		case '\n':
+			validity = invalid;
+			break;
+		default:
+			validity = valid;
+			break;
+	}
+	return (validity);
 }
