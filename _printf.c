@@ -12,14 +12,9 @@ int _printf(const char *format, ...)
 
 	va_start(args, format);
 	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
-	{
 		return (-1);
-	}
 	if (format[i] == '\0')
-	{
 		return (0);
-	}
-
 	while (format && format[i])
 	{
 		if (format[i] == '\0')
@@ -27,8 +22,13 @@ int _printf(const char *format, ...)
 		if (format[i] == '%')
 		{
 			i++;
-			count += check_fmt(args, format[i]);
-			i++;
+			if (check_validity(format[i]) == 1)
+			{
+				count += check_fmt(args, format[i]);
+				i++;
+			}
+			else
+				return (-1);
 		}
 		else
 		{
