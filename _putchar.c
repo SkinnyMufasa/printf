@@ -22,7 +22,6 @@ int _putchar(char c)
 
 int _puts(char *str)
 {
-	int i = 0;
 	int len = 0;
 
 	if (str == NULL)
@@ -32,10 +31,9 @@ int _puts(char *str)
 	}
 	else
 	{
-	while (str[i] != '\0')
+	while (*str != '\0')
 	{
-		len += _putchar(str[i]);
-		i++;
+		len += _putchar(*str++);
 	}
 	}
 	return (len);
