@@ -16,6 +16,8 @@ int _putchar(char c)
 /**
  * _puts - Outputs a string to the standard output.
  * @str: pointer to the null-terminated string to be output.
+ *
+ * Return: string length
  */
 
 int _puts(char *str)
