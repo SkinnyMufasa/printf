@@ -5,33 +5,34 @@
  *
  * Return: Number of digits printed
  */
-void print_number(int num)
+int print_number(va_list args)
 {
-	if (num < 0)
-	{
-		_putchar('-');
-		num = -num;
-	}
+	int num, count;
+	char *numstr;
 
-	if (num / 10)
-		print_number(num / 10);
-	_putchar((num % 10) + '0');
+	num = va_arg(args, int);
+	numstr = int2str(num);
+	count = _puts(numstr);
+	free(numstr);
+	return (count);
 }
 /**
  * digit_count - counts the number of digit in an integer
  * @n: The integer to count digits for
  * Return: Number of digits in the integer
  */
-void digit_count(int n)
+int digit_count(int n)
 {
 	int count = 0;
 
 	if (n == 0)
+		return (1);
 	while (n != 0)
 	{
-		n /= 10;
 		count++;
+		n /= 10;
 	}
+	return (count);
 }
 /**
  * check_fmt - checks the format of a character after a '%' in a string
@@ -65,7 +66,7 @@ int check_fmt(va_list args, char fmt)
 		case 'd':
 			if (sizeof(va_arg(args, int)) == 4)
 			{
-				print_number(va_arg(args, int));
+				count += print_number(args);
 			}
 			break;
 		default:
@@ -73,4 +74,34 @@ int check_fmt(va_list args, char fmt)
 			break;
 	}
 	return (count);
+}
+/**
+ * int2str - converts intiger into a string
+ * @num: number to convert
+ * 
+ * Return: converted int
+*/
+char *int2str(int num)
+{
+	size_t i, neg;
+	char *converted_str;
+
+	i = digit_count(num);
+	neg = num < 0;
+	i += neg;
+	converted_str = (char *)malloc(sizeof(char) * i + 1);
+	if (converted_str == NULL)
+		return (NULL);
+	converted_str[i] = '\0';
+	if (neg)
+		converted_str[0] = '-';
+	while (--i != (neg - 1))
+	{
+		if ((num % 10) < 0)
+			converted_str[i] = ((num % 10) * -1) + 48;
+		else
+			converted_str[i] = ((num % 10) + 48);
+		num = num / 10;
+	}
+	return (converted_str);
 }

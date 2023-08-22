@@ -4,9 +4,10 @@
 #include <stdarg.h>
 #include <string.h>
 #include <unistd.h>
+#include <stdlib.h>
 
-void print_number(int num);
-void digit_count(int n);
+int print_number(va_list args);
+int digit_count(int n);
 int _putchar(char c);
 int _printf(const char *format, ...);
 int _puts(char *str);
