@@ -1,7 +1,7 @@
 #include "main.h"
 /**
  * print_number - prints an integer
- * @num: The number to be printed
+ * @args: The argument list containing the integer to be printed
  *
  * Return: Number of digits printed
  */
@@ -78,7 +78,7 @@ int check_fmt(va_list args, char fmt)
 /**
  * int2str - converts intiger into a string
  * @num: number to convert
- * 
+ *
  * Return: converted int
 */
 char *int2str(int num)
