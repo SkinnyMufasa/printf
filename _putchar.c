@@ -26,11 +26,17 @@ int _puts(char *str)
 	int len = 0;
 
 	if (str == NULL)
+	{
 		str = "(nil)";
+		len = 6;
+	}
+	else
+	{
 	while (str[i] != '\0')
 	{
 		len += _putchar(str[i]);
 		i++;
+	}
 	}
 	return (len);
 }
