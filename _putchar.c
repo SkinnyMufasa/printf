@@ -27,7 +27,7 @@ int _puts(char *str)
 
 	if (str == NULL)
 	{
-		str = "(nil)";
+		str = "(null)";
 		len = 6;
 	}
 	else
