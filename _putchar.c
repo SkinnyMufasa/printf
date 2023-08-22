@@ -5,7 +5,7 @@
  * @c: The character to print
  *
  * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriatetly.
+ * On error, -1 is returned, and errno is set appropriately.
  */
 
 int _putchar(char c)
@@ -13,23 +13,22 @@ int _putchar(char c)
 	return (write(1, &c, 1));
 }
 
-#include "main.h"
-
 /**
-  * print_string - print a string
-  * @str: a pointer to a string
-  * Return: the len of the string
-  */
+ * _puts - Outputs a string to the standard output.
+ * @str: pointer to the null-terminated string to be output.
+ */
 
-int print_string(char *str)
+int _puts(char *str)
 {
-	int i;
-	int len = 0;
+	int i = 0;
+    int len = 0;
 
-	if (str == NULL)
-		str = ("null");
-	for (i = 0; str[i] != '\0'; i++)
+    if (str == NULL)
+        str = "(nil)";
+    while (str[i] != '\0')
+	{
 		len += _putchar(str[i]);
-
-	return (len);
+		i++;
+	}
+    return (len);
 }
