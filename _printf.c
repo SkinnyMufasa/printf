@@ -15,7 +15,11 @@ int _printf(const char *format, ...)
 	{
 		return (-1);
 	}
-	
+	if (format[i] == '\0')
+	{
+		return (0);
+	}
+
 	while (format && format[i])
 	{
 		if (format[i] == '\0')
